@@ -101,10 +101,18 @@ function updateReport(){
     report="FPI-6: Right "+fmt(r.total)+" ("+r.ind.toLowerCase()+"), Left "+fmt(l.total)+" ("+l.ind.toLowerCase()+"). ";
     if(r.ind===l.ind) report+="Findings indicate bilateral "+r.ind.toLowerCase()+" foot posture.";
     else report+="Findings indicate "+r.ind.toLowerCase()+" foot posture on the right and "+l.ind.toLowerCase()+" foot posture on the left.";
+    var rPro=r.total>=6, lPro=l.total>=6;
+    if(rPro && lPro) report+=" The pronated foot posture pattern is consistent with bilateral pes planus/flat-foot posture.";
+    else if(rPro) report+=" The pronated foot posture pattern on the right is consistent with pes planus/flat-foot posture.";
+    else if(lPro) report+=" The pronated foot posture pattern on the left is consistent with pes planus/flat-foot posture.";
   } else if(r.complete){
-    report="FPI-6 Right: "+fmt(r.total)+" ("+r.ind.toLowerCase()+" foot posture). Complete Left scoring for the bilateral summary.";
+    report="FPI-6 Right: "+fmt(r.total)+" ("+r.ind.toLowerCase()+" foot posture).";
+    if(r.total>=6) report+=" The pronated foot posture pattern is consistent with pes planus/flat-foot posture.";
+    report+=" Complete Left scoring for the bilateral summary.";
   } else if(l.complete){
-    report="FPI-6 Left: "+fmt(l.total)+" ("+l.ind.toLowerCase()+" foot posture). Complete Right scoring for the bilateral summary.";
+    report="FPI-6 Left: "+fmt(l.total)+" ("+l.ind.toLowerCase()+" foot posture).";
+    if(l.total>=6) report+=" The pronated foot posture pattern is consistent with pes planus/flat-foot posture.";
+    report+=" Complete Right scoring for the bilateral summary.";
   }
   document.getElementById("report").textContent=report;
 }
